@@ -5,17 +5,15 @@ module shotclock(clk, sel, reset,  countdown);
 	input sel; 
 	output [n-1:0] countdown; 
 	reg[n-1:0] count; 
-	always @(sel) 
-	begin 
-		count = (sel == 0) ? 5'd30 : 5'd24;
-	end
+	count = (sel == 0) ? 5'd30 : 5'd24;
 	
+	@always(clk)
 	begin 
 		if(count > 0)
 			count <= count-1; 	
 	end 
 	
-	always @(reset)
+	@always(reset)
 	begin 
 		count = (sel == 0) ? 5'd30 : 5'd24;
 	end 
